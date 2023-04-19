@@ -1,5 +1,6 @@
 ﻿
 
+using chatapp.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace chatapp.Data
@@ -9,6 +10,12 @@ namespace chatapp.Data
 
         public Entities(DbContextOptions<Entities> options) : base(options) { }
 
+        public DbSet<Message> messages { get; set; }
 
+        public DbSet<Conversation> conversations { get; set; }
+
+        public DbSet<GroupMember> groupMembers { get; set; }
+
+        public DbSet<Contact> contacts { get; set; }
     }
 }
