@@ -1,0 +1,8 @@
+chatapp/secret.json
+.vs
+chatapp/obj
+chatapp/bin
+chatapp/Data/Migrations
+chatapp/Data/Images
+chatapp/secret.Development.json
+chatapp/appsettings.Development.json
