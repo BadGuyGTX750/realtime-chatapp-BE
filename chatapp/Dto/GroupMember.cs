@@ -12,7 +12,6 @@ namespace chatapp.Dto
 
         [ForeignKey("contact")]
         [Required]
-        [JsonIgnore]
         public Guid contact_id { get; set; }
 
         [JsonIgnore]
@@ -20,9 +19,9 @@ namespace chatapp.Dto
 
         [ForeignKey("conversation")]
         [Required]
-        [JsonIgnore]
         public Guid conversation_id { get; set; }
 
+        [JsonIgnore]
         public Conversation conversation { get; set; }
 
         [Required]

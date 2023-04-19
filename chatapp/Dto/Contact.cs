@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace chatapp.Dto
 {
@@ -16,5 +17,8 @@ namespace chatapp.Dto
 
         [Required]
         public string email { get; set; }
+
+        [JsonIgnore]
+        public List<GroupMember> group_members { get; set; }
     }
 }

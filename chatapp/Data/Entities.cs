@@ -17,5 +17,20 @@ namespace chatapp.Data
         public DbSet<GroupMember> groupMembers { get; set; }
 
         public DbSet<Contact> contacts { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Message>()
+                .HasOne(u => u.conversation)
+                .WithMany(u => u.messages);
+
+            modelBuilder.Entity<GroupMember>()
+                .HasOne(u => u.conversation)
+                .WithMany(u => u.group_members);
+
+            modelBuilder.Entity<GroupMember>()
+                .HasOne(u => u.contact)
+                .WithMany(u => u.group_members);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace chatapp.Dto
 {
@@ -10,5 +11,11 @@ namespace chatapp.Dto
 
         [Required]
         public string conversation_name { get; set; }
+
+        [Required]
+        public List<Message> messages { get; set; }
+
+        [JsonIgnore]
+        public List<GroupMember> group_members { get; set; }
     }
 }
