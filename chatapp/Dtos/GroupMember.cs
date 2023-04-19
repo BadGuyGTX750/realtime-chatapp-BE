@@ -28,6 +28,6 @@ namespace chatapp.Dto
         public DateTime joined_datetime { get; set; }
 
         [Required]
-        public DateTime left_datetime { get;}
+        public DateTime left_datetime { get; set; }
     }
 }
