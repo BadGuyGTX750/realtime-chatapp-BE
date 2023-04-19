@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace chatapp.Dto
 {
@@ -19,7 +20,12 @@ namespace chatapp.Dto
         [Required]
         public DateTime sentAt { get; set; }
 
+        [ForeignKey("conversation")]
         [Required]
+        [JsonIgnore]
         public Guid conversation_id { get; set; }
+
+        [JsonIgnore]
+        public Conversation conversation { get; set; }
     }
 }
