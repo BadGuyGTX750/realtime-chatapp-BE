@@ -20,17 +20,20 @@ namespace chatapp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Message>()
-                .HasOne(u => u.conversation)
-                .WithMany(u => u.messages);
+            modelBuilder.Entity<Conversation>()
+                .HasMany(u => u.messages)
+                .WithOne(u => u.conversation)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<GroupMember>()
-                .HasOne(u => u.conversation)
-                .WithMany(u => u.group_members);
+            modelBuilder.Entity<Conversation>()
+                .HasMany(u => u.group_members)
+                .WithOne(u => u.conversation)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<GroupMember>()
-                .HasOne(u => u.contact)
-                .WithMany(u => u.group_members);
+            modelBuilder.Entity<Contact>()
+                .HasMany(u => u.group_members)
+                .WithOne(u => u.contact)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
