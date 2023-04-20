@@ -14,9 +14,9 @@ namespace chatapp.Controllers
             ContactService contactService,
             ConversationService conversationService)
         {
-            this._service = service;
-            this._contactService = contactService;
-            this._conversationService = conversationService;
+            _service = service;
+            _contactService = contactService;
+            _conversationService = conversationService;
         }
 
         [HttpPost("/api/groupMember/create")]

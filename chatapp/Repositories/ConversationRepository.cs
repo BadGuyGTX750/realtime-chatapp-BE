@@ -10,7 +10,7 @@ namespace chatapp.Repositories
 
         public ConversationRepository(Entities dbContext)
         {
-            this._dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public async Task<Guid> ConversationCreate(Conversation conv)

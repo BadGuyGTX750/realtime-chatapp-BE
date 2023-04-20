@@ -10,7 +10,7 @@ namespace chatapp.Repositories
 
         public ContactRepository(Entities dbContext)
         {
-            this._dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public async Task<Guid> ContactCreate(Contact contact)

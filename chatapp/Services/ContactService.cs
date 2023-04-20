@@ -10,7 +10,7 @@ namespace chatapp.Services
 
         public ContactService(ContactRepository repository)
         {
-            this._repository = repository;
+            _repository = repository;
         }
 
         public async Task<Guid> ContactCreate(ContactModelState contactMS)

@@ -10,7 +10,7 @@ namespace chatapp.Controllers
 
         public ConversationController(ConversationService service)
         {
-            this._service = service;
+            _service = service;
         }
 
         [HttpPost("/api/conversation/create")]

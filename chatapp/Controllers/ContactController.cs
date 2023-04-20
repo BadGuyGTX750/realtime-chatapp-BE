@@ -12,7 +12,7 @@ namespace chatapp.Controllers
 
         public ContactController(ContactService service)
         {
-            this._service = service;
+            _service = service;
         }
 
         [HttpPost("/api/contact/create")]

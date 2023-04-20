@@ -12,8 +12,8 @@ namespace chatapp.Controllers
         public MessageController(MessageService service,
             ConversationService conversationService)
         {
-            this._service = service;
-            this._conversationService = conversationService;
+            _service = service;
+            _conversationService = conversationService;
         }
 
         [HttpPost("/api/message/create")]

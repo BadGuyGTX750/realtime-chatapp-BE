@@ -10,7 +10,7 @@ namespace chatapp.Repositories
 
         public GroupMemberRepository(Entities dbContext)
         {
-            this._dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public async Task<Guid> GroupMemberCreate(GroupMember grpMb)

@@ -9,7 +9,7 @@ namespace chatapp.Services
 
         public ConversationService(ConversationRepository repository)
         {
-            this._repository = repository;
+            _repository = repository;
         }
 
         public async Task<Guid> ConversationCreate(ConversationModelState convMS)
