@@ -1,6 +1,6 @@
 ﻿
 
-using chatapp.Dto;
+using chatapp.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace chatapp.Data

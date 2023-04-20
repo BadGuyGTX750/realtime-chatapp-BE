@@ -1,5 +1,5 @@
 ﻿using chatapp.Data;
-using chatapp.Dto;
+using chatapp.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace chatapp.Repositories

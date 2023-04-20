@@ -3,12 +3,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace chatapp.Dto
+namespace chatapp.Dtos
 {
     public class Message
     {
         [Key]
         [Required]
+        [JsonIgnore]
         public Guid message_id { get; set; }
 
         [Required]
@@ -18,6 +19,7 @@ namespace chatapp.Dto
         public string message_text { get; set; }
 
         [Required]
+        [JsonIgnore]
         public DateTime sentAt { get; set; }
 
         [ForeignKey("conversation")]

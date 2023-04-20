@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace chatapp.Dto
+namespace chatapp.Dtos
 {
     public class Conversation
     {

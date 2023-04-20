@@ -1,5 +1,5 @@
 ﻿using chatapp.Data;
-using chatapp.Dto;
+using chatapp.Dtos;
 using chatapp.Repositories;
 
 namespace chatapp.Services

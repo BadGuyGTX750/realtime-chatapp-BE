@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace chatapp.Dto
+namespace chatapp.Dtos
 {
     public class GroupMember
     {
