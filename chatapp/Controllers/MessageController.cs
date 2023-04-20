@@ -7,10 +7,13 @@ namespace chatapp.Controllers
     public class MessageController : Controller
     {
         private readonly MessageService _service;
+        private readonly ConversationService _conversationService;
 
-        public MessageController(MessageService service)
+        public MessageController(MessageService service,
+            ConversationService conversationService)
         {
             this._service = service;
+            this._conversationService = conversationService;
         }
 
         [HttpPost("/api/message/create")]
@@ -18,6 +21,9 @@ namespace chatapp.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            if (await _conversationService.ConversationGetById(msgMS.conversation_id) == null)
+                return NotFound("No conversation with specified conversation_id exists");
 
             Guid id = await _service.MessageCreate(msgMS);
             if (id == Guid.Empty)
