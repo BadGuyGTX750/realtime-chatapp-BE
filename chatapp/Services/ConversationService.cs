@@ -12,8 +12,11 @@ namespace chatapp.Services
             this._repository = repository;
         }
 
-        public async Task<Guid> ConversationCreate(Conversation conv)
+        public async Task<Guid> ConversationCreate(ConversationModelState convMS)
         {
+            Conversation conv = new Conversation();
+            conv.conversation_name = convMS.conversation_name;
+
             return await _repository.ConversationCreate(conv);
         }
 

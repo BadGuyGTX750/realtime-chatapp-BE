@@ -12,9 +12,14 @@ namespace chatapp.Services
             this._repository = repository;
         }
 
-        public async Task<Guid> MessageCreate(Message msg)
+        public async Task<Guid> MessageCreate(MessageModelState msgMs)
         {
-            
+            Message msg = new Message();
+            msg.conversation_id = msgMs.conversation_id;
+            msg.from_email = msgMs.from_email;
+            msg.message_text = msgMs.message_text;
+            msg.sentAt = DateTime.UtcNow;
+
             return await _repository.MessageCreate(msg);
         }
 

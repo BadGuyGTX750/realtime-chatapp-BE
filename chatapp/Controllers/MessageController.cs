@@ -1,4 +1,5 @@
-﻿using chatapp.Services;
+﻿using chatapp.Dtos;
+using chatapp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace chatapp.Controllers
@@ -13,8 +14,15 @@ namespace chatapp.Controllers
         }
 
         [HttpPost("/api/message/create")]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create([FromBody] MessageModelState msgMS)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Guid id = await _service.MessageCreate(msgMS);
+            if (id == Guid.Empty)
+                return StatusCode(500);
+
             return Ok();
         }
 
