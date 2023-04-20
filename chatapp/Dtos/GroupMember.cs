@@ -25,6 +25,12 @@ namespace chatapp.Dtos
         public Conversation conversation { get; set; }
 
         [Required]
+        public bool isOriginalGroupAdmin { get; set; } = false;
+
+        [Required]
+        public bool isGroupAdmin { get; set;} = false;
+
+        [Required]
         public DateTime joined_datetime { get; set; }
 
         [Required]

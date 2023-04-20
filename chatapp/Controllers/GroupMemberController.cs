@@ -1,4 +1,5 @@
-﻿using chatapp.Services;
+﻿using chatapp.Dtos;
+using chatapp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace chatapp.Controllers
@@ -13,9 +14,16 @@ namespace chatapp.Controllers
         }
 
         [HttpPost("/api/groupMember/create")]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create([FromBody] GroupMemberModelState grpMbMS)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Guid id = await _service.GroupMemberCreate(grpMbMS);
+            if (id == Guid.Empty)
+                return StatusCode(500);
+
+            return Ok(id);
         }
 
         [HttpGet("/api/groupMember/getById")]

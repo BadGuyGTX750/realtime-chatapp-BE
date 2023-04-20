@@ -12,8 +12,11 @@ namespace chatapp.Services
             this._repository = repository;
         }
 
-        public async Task<Guid> GroupMemberCreate(GroupMember grpMb)
+        public async Task<Guid> GroupMemberCreate(GroupMemberModelState grpMbMS)
         {
+            GroupMember grpMb = new GroupMember();
+            grpMb.contact_id = grpMbMS.contact_id;
+            grpMb.conversation_id = grpMbMS.conversation_id;
             return await _repository.GroupMemberCreate(grpMb);
         }
 
