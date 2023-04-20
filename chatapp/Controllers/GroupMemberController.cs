@@ -41,7 +41,14 @@ namespace chatapp.Controllers
         [HttpGet("/api/groupMember/getById")]
         public async Task<IActionResult> GetById([FromQuery] Guid id)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            GroupMember grpMb = await _service.GroupMemberGetById(id);
+            if (grpMb == null)
+                return NotFound();
+
+            return Ok(grpMb);
         }
 
 

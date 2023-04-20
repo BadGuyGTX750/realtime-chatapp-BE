@@ -31,7 +31,14 @@ namespace chatapp.Controllers
         [HttpGet("/api/contact/getById")]
         public async Task<IActionResult> GetById([FromQuery] Guid id)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Contact contact = await _service.ContactGetById(id);
+            if (contact == null)
+                return NotFound();
+
+            return Ok(contact);
         }
 
 

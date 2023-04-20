@@ -29,7 +29,14 @@ namespace chatapp.Controllers
         [HttpGet("/api/conversation/getById")]
         public async Task<IActionResult> GetById([FromQuery] Guid id)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Conversation conv = await _service.ConversationGetById(id);
+            if (conv == null)
+                return NotFound();
+
+            return Ok(conv);
         }
 
 

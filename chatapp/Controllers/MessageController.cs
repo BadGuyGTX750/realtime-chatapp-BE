@@ -35,7 +35,14 @@ namespace chatapp.Controllers
         [HttpGet("/api/message/getById")]
         public async Task<IActionResult> GetById([FromQuery] Guid id)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Message msg = await _service.MessageGetById(id);
+            if (msg == null)
+                return NotFound();
+
+            return Ok(msg);
         }
 
 
