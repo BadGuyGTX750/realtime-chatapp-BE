@@ -16,6 +16,7 @@ namespace chatapp.Services
         {
             Conversation conv = new Conversation();
             conv.conversation_name = convMS.conversation_name;
+            conv.isGroup = convMS.isGroup;
 
             return await _repository.ConversationCreate(conv);
         }

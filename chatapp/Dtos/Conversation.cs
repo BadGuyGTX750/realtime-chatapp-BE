@@ -13,6 +13,9 @@ namespace chatapp.Dtos
         public string conversation_name { get; set; }
 
         [Required]
+        public bool isGroup { get; set; } = false;
+
+        [Required]
         public List<Message> messages { get; set; }
 
         [JsonIgnore]

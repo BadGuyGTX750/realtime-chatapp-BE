@@ -6,5 +6,8 @@ namespace chatapp.Dtos
     {
         [Required]
         public string conversation_name { get; set; }
+
+        [Required]
+        public bool isGroup { get; set; }
     }
 }
