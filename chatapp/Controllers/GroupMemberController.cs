@@ -7,10 +7,16 @@ namespace chatapp.Controllers
     public class GroupMemberController : Controller
     {
         private readonly GroupMemberService _service;
+        private readonly ContactService _contactService;
+        private readonly ConversationService _conversationService;
 
-        public GroupMemberController(GroupMemberService service)
+        public GroupMemberController(GroupMemberService service,
+            ContactService contactService,
+            ConversationService conversationService)
         {
             this._service = service;
+            this._contactService = contactService;
+            this._conversationService = conversationService;
         }
 
         [HttpPost("/api/groupMember/create")]
@@ -18,6 +24,12 @@ namespace chatapp.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            if (await _contactService.ContactGetById(grpMbMS.contact_id) == null)
+                return NotFound("No contact with specified contact_id exists");
+
+            if (await _conversationService.ConversationGetById(grpMbMS.conversation_id) == null)
+                return NotFound("No conversation with specified conversation_id exists");
 
             Guid id = await _service.GroupMemberCreate(grpMbMS);
             if (id == Guid.Empty)
