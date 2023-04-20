@@ -1,5 +1,6 @@
 ﻿using chatapp.Dtos;
 using chatapp.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace chatapp.Services
 {
@@ -24,6 +25,11 @@ namespace chatapp.Services
         public async Task<GroupMember> GroupMemberGetById(Guid id)
         {
             return await _repository.GroupMemberGetById(id);
+        }
+
+        public async Task<GroupMember> GroupMemberGetByCoversationIdAndContactId(Guid conv_id, Guid contact_id)
+        {
+            return await _repository.GroupMemberGetByCoversationIdAndContactId(conv_id, contact_id);
         }
 
         public async Task<bool> GroupMemberUpdate(GroupMember grpMb)

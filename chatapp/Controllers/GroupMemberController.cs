@@ -31,6 +31,10 @@ namespace chatapp.Controllers
             if (await _conversationService.ConversationGetById(grpMbMS.conversation_id) == null)
                 return NotFound("No conversation with specified conversation_id exists");
 
+            GroupMember grpMbCheck = await _service.GroupMemberGetByCoversationIdAndContactId(grpMbMS.conversation_id, grpMbMS.contact_id);
+            if (grpMbCheck != null)
+                return StatusCode(409, "The Contact has already a GroupMember associated with this conversation");
+
             Guid id = await _service.GroupMemberCreate(grpMbMS);
             if (id == Guid.Empty)
                 return StatusCode(500);
