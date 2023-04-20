@@ -17,6 +17,7 @@ namespace chatapp.Services
             GroupMember grpMb = new GroupMember();
             grpMb.contact_id = grpMbMS.contact_id;
             grpMb.conversation_id = grpMbMS.conversation_id;
+            grpMb.joined_datetime = DateTime.UtcNow;
             return await _repository.GroupMemberCreate(grpMb);
         }
 
