@@ -52,6 +52,18 @@ namespace chatapp.Repositories
             }
         }
 
+        public async Task<List<GroupMember>> GroupMemberGetByCoversationId(Guid conv_id)
+        {
+            try
+            {
+                return await _dbContext.groupMembers.Where(u => u.conversation_id == conv_id).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<bool> GroupMemberUpdate(GroupMember grpMb)
         {
             try

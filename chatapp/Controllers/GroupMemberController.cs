@@ -35,7 +35,15 @@ namespace chatapp.Controllers
             if (grpMbCheck != null)
                 return StatusCode(409, "The Contact has already a GroupMember associated with this conversation");
 
-            Guid id = await _service.GroupMemberCreate(grpMbMS);
+            //Check if conversation is a group: if it is make the first group member admin (both original and admin)
+            List<GroupMember> grpMbList = await _service.GroupMemberGetByCoversationId(grpMbMS.conversation_id);
+            Conversation conv = await _conversationService.ConversationGetById(grpMbMS.conversation_id);
+            bool isAllTimeAdmin = false;
+            if (conv.isGroup && (grpMbList == null || !grpMbList.Any()))
+                isAllTimeAdmin = true;
+              
+
+            Guid id = await _service.GroupMemberCreate(grpMbMS, isAllTimeAdmin, isAllTimeAdmin);
             if (id == Guid.Empty)
                 return StatusCode(500);
 
