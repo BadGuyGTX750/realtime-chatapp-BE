@@ -9,7 +9,6 @@ namespace chatapp.Dtos
     {
         [Key]
         [Required]
-        [JsonIgnore]
         public Guid message_id { get; set; }
 
         [Required]
@@ -19,7 +18,6 @@ namespace chatapp.Dtos
         public string message_text { get; set; }
 
         [Required]
-        [JsonIgnore]
         public DateTime sentAt { get; set; }
 
         [ForeignKey("conversation")]
