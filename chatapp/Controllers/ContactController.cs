@@ -43,8 +43,14 @@ namespace chatapp.Controllers
 
 
         [HttpDelete("/api/contact/deleteById")]
-        public async Task<IActionResult> Delete([FromQuery] Guid id)
+        public async Task<IActionResult> DeleteById([FromQuery] Guid id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!await _service.ContactDeleteById(id))
+                return StatusCode(500);
+
             return Ok();
         }
     }
