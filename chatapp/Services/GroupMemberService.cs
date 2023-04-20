@@ -12,7 +12,7 @@ namespace chatapp.Services
             this._repository = repository;
         }
 
-        public async Task<bool> GroupMemberCreate(GroupMember grpMb)
+        public async Task<Guid> GroupMemberCreate(GroupMember grpMb)
         {
             return await _repository.GroupMemberCreate(grpMb);
         }

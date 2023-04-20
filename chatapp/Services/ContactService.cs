@@ -13,7 +13,7 @@ namespace chatapp.Services
             this._repository = repository;
         }
 
-        public async Task<bool> ContactCreate(Contact contact)
+        public async Task<Guid> ContactCreate(Contact contact)
         {
             return await _repository.ContactCreate(contact);
         }

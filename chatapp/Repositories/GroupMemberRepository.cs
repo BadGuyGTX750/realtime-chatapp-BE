@@ -13,17 +13,18 @@ namespace chatapp.Repositories
             this._dbContext = dbContext;
         }
 
-        public async Task<bool> GroupMemberCreate(GroupMember grpMb)
+        public async Task<Guid> GroupMemberCreate(GroupMember grpMb)
         {
             try
             {
                 await _dbContext.groupMembers.AddAsync(grpMb);
                 await _dbContext.SaveChangesAsync();
-                return true;
+                var id_return = await _dbContext.groupMembers.Select(u => u.group_member_id).LastAsync();
+                return id_return;
             }
             catch (Exception ex)
             {
-                return false;
+                return Guid.Empty;
             }
         }
 

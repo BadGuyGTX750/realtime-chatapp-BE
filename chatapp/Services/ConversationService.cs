@@ -12,7 +12,7 @@ namespace chatapp.Services
             this._repository = repository;
         }
 
-        public async Task<bool> ConversationCreate(Conversation conv)
+        public async Task<Guid> ConversationCreate(Conversation conv)
         {
             return await _repository.ConversationCreate(conv);
         }

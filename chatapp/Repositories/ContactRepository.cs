@@ -13,17 +13,18 @@ namespace chatapp.Repositories
             this._dbContext = dbContext;
         }
 
-        public async Task<bool> ContactCreate(Contact contact)
+        public async Task<Guid> ContactCreate(Contact contact)
         {
             try
             {
                 await _dbContext.contacts.AddAsync(contact);
                 await _dbContext.SaveChangesAsync();
-                return true;
+                var id_return = await _dbContext.contacts.Select(u => u.contact_id).LastAsync();
+                return id_return;
             }
             catch (Exception ex)
             {
-                return false;
+                return Guid.Empty;
             }
         }
 

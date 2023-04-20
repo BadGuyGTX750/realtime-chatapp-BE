@@ -13,17 +13,18 @@ namespace chatapp.Repositories
             this._dbContext = dbContext;
         }
 
-        public async Task<bool> ConversationCreate(Conversation conv)
+        public async Task<Guid> ConversationCreate(Conversation conv)
         {
             try
             {
                 await _dbContext.conversations.AddAsync(conv);
                 await _dbContext.SaveChangesAsync();
-                return true;
+                var id_return = await _dbContext.conversations.Select(u => u.conversation_id).LastAsync();
+                return id_return;
             }
             catch (Exception ex)
             {
-                return false;
+                return Guid.Empty;
             }
         }
 
