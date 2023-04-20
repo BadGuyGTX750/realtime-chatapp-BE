@@ -13,8 +13,14 @@ namespace chatapp.Services
             this._repository = repository;
         }
 
-        public async Task<Guid> ContactCreate(Contact contact)
+        public async Task<Guid> ContactCreate(ContactModelState contactMS)
         {
+            Contact contact = new Contact();
+            contact.first_name = contactMS.first_name;
+            contact.last_name = contactMS.last_name;
+            contact.username = contactMS.username;
+            contact.email = contactMS.email;
+
             return await _repository.ContactCreate(contact);
         }
 

@@ -1,14 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace chatapp.Dtos
 {
-    public class Contact
+    public class ContactModelState
     {
-        [Key]
-        [Required]
-        public Guid contact_id { get; set; }
-
         [Required]
         public string first_name { get; set; }
 
@@ -20,8 +15,5 @@ namespace chatapp.Dtos
 
         [Required]
         public string email { get; set; }
-
-        [JsonIgnore]
-        public List<GroupMember> group_members { get; set; }
     }
 }
