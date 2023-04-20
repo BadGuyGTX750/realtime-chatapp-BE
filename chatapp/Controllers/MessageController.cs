@@ -23,7 +23,7 @@ namespace chatapp.Controllers
             if (id == Guid.Empty)
                 return StatusCode(500);
 
-            return Ok();
+            return Ok(id);
         }
 
         [HttpGet("/api/message/getById")]
