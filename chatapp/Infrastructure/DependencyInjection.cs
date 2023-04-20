@@ -14,9 +14,15 @@ namespace chatapp.Infrastructure
         {
             // Add services
             services.AddScoped<ContactService>();
+            services.AddScoped<ConversationService>();
+            services.AddScoped<GroupMemberService>();
+            services.AddScoped<MessageService>();
 
             // Add repositories
             services.AddScoped<ContactRepository>();
+            services.AddScoped<ConversationRepository>();
+            services.AddScoped<GroupMemberRepository>();
+            services.AddScoped<MessageRepository>();
 
             // Add controllers
             services.AddControllers();
