@@ -17,10 +17,10 @@ namespace chatapp.Repositories
         {
             try
             {
+                conv.conversation_id = Guid.NewGuid();
                 await _dbContext.conversations.AddAsync(conv);
                 await _dbContext.SaveChangesAsync();
-                var id_return = await _dbContext.conversations.Select(u => u.conversation_id).LastAsync();
-                return id_return;
+                return conv.conversation_id;
             }
             catch (Exception ex)
             {

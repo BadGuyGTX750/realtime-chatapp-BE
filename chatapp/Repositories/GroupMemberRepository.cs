@@ -17,10 +17,10 @@ namespace chatapp.Repositories
         {
             try
             {
+                grpMb.group_member_id = Guid.NewGuid();
                 await _dbContext.groupMembers.AddAsync(grpMb);
                 await _dbContext.SaveChangesAsync();
-                var id_return = await _dbContext.groupMembers.Select(u => u.group_member_id).LastAsync();
-                return id_return;
+                return grpMb.group_member_id;
             }
             catch (Exception ex)
             {
