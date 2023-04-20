@@ -6,19 +6,19 @@ namespace chatapp.Repositories
 {
     public class ContactRepository
     {
-        private readonly Entities dbContext;
+        private readonly Entities _dbContext;
 
         public ContactRepository(Entities dbContext)
         {
-            this.dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         public async Task<bool> ContactCreate(Contact contact)
         {
             try
             {
-                await dbContext.contacts.AddAsync(contact);
-                await dbContext.SaveChangesAsync();
+                await _dbContext.contacts.AddAsync(contact);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -31,7 +31,7 @@ namespace chatapp.Repositories
         {
             try
             {
-                return await dbContext.contacts.Where(u => u.contact_id == id).FirstAsync();
+                return await _dbContext.contacts.Where(u => u.contact_id == id).FirstAsync();
             }
             catch (Exception ex)
             {
@@ -43,8 +43,8 @@ namespace chatapp.Repositories
         {
             try
             {
-                dbContext.contacts.Update(contact);
-                await dbContext.SaveChangesAsync();
+                _dbContext.contacts.Update(contact);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -57,9 +57,9 @@ namespace chatapp.Repositories
         {
             try
             {
-                var contact = await dbContext.contacts.Where(u => u.contact_id == id).FirstAsync();
-                dbContext.contacts.Remove(contact);
-                await dbContext.SaveChangesAsync();
+                var contact = await _dbContext.contacts.Where(u => u.contact_id == id).FirstAsync();
+                _dbContext.contacts.Remove(contact);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)

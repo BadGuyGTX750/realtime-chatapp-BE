@@ -1,4 +1,6 @@
 ﻿using chatapp.Data;
+using chatapp.Repositories;
+using chatapp.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -10,6 +12,12 @@ namespace chatapp.Infrastructure
             this IServiceCollection services,
             IConfiguration configuration)
         {
+            // Add services
+            services.AddScoped<ContactService>();
+
+            // Add repositories
+            services.AddScoped<ContactRepository>();
+
             // Add controllers
             services.AddControllers();
 
