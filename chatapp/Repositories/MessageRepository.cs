@@ -6,19 +6,19 @@ namespace chatapp.Repositories
 {
     public class MessageRepository
     {
-        private readonly Entities dbContext;
+        private readonly Entities _dbContext;
 
         public MessageRepository(Entities dbContext)
         {
-            this.dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         public async Task<bool> MessageCreate(Message msg)
         {
             try
             {
-                await dbContext.messages.AddAsync(msg);
-                await dbContext.SaveChangesAsync();
+                await _dbContext.messages.AddAsync(msg);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -31,7 +31,7 @@ namespace chatapp.Repositories
         {
             try
             {
-                return await dbContext.messages.Where(u => u.message_id == id).FirstAsync();
+                return await _dbContext.messages.Where(u => u.message_id == id).FirstAsync();
             }
             catch (Exception ex)
             {
@@ -43,8 +43,8 @@ namespace chatapp.Repositories
         {
             try
             {
-                dbContext.messages.Update(msg);
-                await dbContext.SaveChangesAsync();
+                _dbContext.messages.Update(msg);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -57,9 +57,9 @@ namespace chatapp.Repositories
         {
             try
             {
-                var msg = await dbContext.messages.Where(u => u.message_id == id).FirstAsync();
-                dbContext.messages.Remove(msg);
-                await dbContext.SaveChangesAsync();
+                var msg = await _dbContext.messages.Where(u => u.message_id == id).FirstAsync();
+                _dbContext.messages.Remove(msg);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)

@@ -6,19 +6,19 @@ namespace chatapp.Repositories
 {
     public class GroupMemberRepository
     {
-        private readonly Entities dbContext;
+        private readonly Entities _dbContext;
 
         public GroupMemberRepository(Entities dbContext)
         {
-            this.dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         public async Task<bool> GroupMemberCreate(GroupMember grpMb)
         {
             try
             {
-                await dbContext.groupMembers.AddAsync(grpMb);
-                await dbContext.SaveChangesAsync();
+                await _dbContext.groupMembers.AddAsync(grpMb);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -31,7 +31,7 @@ namespace chatapp.Repositories
         {
             try
             {
-                return await dbContext.groupMembers.Where(u => u.group_member_id == id).FirstAsync();
+                return await _dbContext.groupMembers.Where(u => u.group_member_id == id).FirstAsync();
             }
             catch (Exception ex)
             {
@@ -43,8 +43,8 @@ namespace chatapp.Repositories
         {
             try
             {
-                dbContext.groupMembers.Update(grpMb);
-                await dbContext.SaveChangesAsync();
+                _dbContext.groupMembers.Update(grpMb);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -57,9 +57,9 @@ namespace chatapp.Repositories
         {
             try
             {
-                var grpMb = await dbContext.groupMembers.Where(u => u.group_member_id == id).FirstAsync();
-                dbContext.groupMembers.Remove(grpMb);
-                await dbContext.SaveChangesAsync();
+                var grpMb = await _dbContext.groupMembers.Where(u => u.group_member_id == id).FirstAsync();
+                _dbContext.groupMembers.Remove(grpMb);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)

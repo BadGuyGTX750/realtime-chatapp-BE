@@ -6,19 +6,19 @@ namespace chatapp.Repositories
 {
     public class ConversationRepository
     {
-        private readonly Entities dbContext;
+        private readonly Entities _dbContext;
 
         public ConversationRepository(Entities dbContext)
         {
-            this.dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         public async Task<bool> ConversationCreate(Conversation conv)
         {
             try
             {
-                await dbContext.conversations.AddAsync(conv);
-                await dbContext.SaveChangesAsync();
+                await _dbContext.conversations.AddAsync(conv);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -31,7 +31,7 @@ namespace chatapp.Repositories
         {
             try
             {
-                return await dbContext.conversations.Where(u => u.conversation_id == id).FirstAsync();
+                return await _dbContext.conversations.Where(u => u.conversation_id == id).FirstAsync();
             }
             catch (Exception ex)
             {
@@ -43,8 +43,8 @@ namespace chatapp.Repositories
         {
             try
             {
-                dbContext.conversations.Update(conv);
-                await dbContext.SaveChangesAsync();
+                _dbContext.conversations.Update(conv);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -57,9 +57,9 @@ namespace chatapp.Repositories
         {
             try
             {
-                var conv = await dbContext.conversations.Where(u => u.conversation_id == id).FirstAsync();
-                dbContext.conversations.Remove(conv);
-                await dbContext.SaveChangesAsync();
+                var conv = await _dbContext.conversations.Where(u => u.conversation_id == id).FirstAsync();
+                _dbContext.conversations.Remove(conv);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
