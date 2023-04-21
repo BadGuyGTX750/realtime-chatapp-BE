@@ -35,6 +35,22 @@ namespace chatapp.Controllers
             return Ok(id);
         }
 
+        [HttpPost("/api/contact/login")]
+        public async Task<IActionResult> Login([FromBody] LoginModelState credentials)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var contact = await _service.ContactGetByEmail(credentials.email);
+            if (contact == null)
+                return NotFound("Account does not exist");
+
+            if (contact.password.Equals(credentials.password))
+                return BadRequest("Bad credentials");
+
+            return Ok();
+        }
+
         [HttpGet("/api/contact/getById")]
         public async Task<IActionResult> GetById([FromQuery] Guid id)
         {
