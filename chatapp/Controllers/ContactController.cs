@@ -69,6 +69,17 @@ namespace chatapp.Controllers
             return Ok();
         }
 
+        [HttpPost("/api/contact/logout")]
+        public async Task<IActionResult> Logout()
+        {
+            // Set the cookies to expire in the past
+            CookieOptions ckOpt = _cookieOptions;
+            ckOpt.Expires = DateTime.UtcNow.AddDays(-1);
+            Response.Cookies.Append("realtime-chatapp-access-token", "", ckOpt);
+
+            return Ok();
+        }
+
         [HttpGet("/api/contact/getById")]
         public async Task<IActionResult> GetById([FromQuery] Guid id)
         {
