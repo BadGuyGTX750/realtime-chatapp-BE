@@ -15,11 +15,18 @@ namespace chatapp.Controllers
             _service = service;
         }
 
-        [HttpPost("/api/contact/create")]
-        public async Task<IActionResult> Create([FromBody] ContactModelState contactMS)
+        [HttpPost("/api/contact/register")]
+        public async Task<IActionResult> Register([FromBody] ContactModelState contactMS)
         {
             if (!ModelState.IsValid) 
                 return BadRequest(ModelState);
+
+            Contact contactTmp = await _service.ContactGetByEmail(contactMS.email);
+            if (contactTmp != null)
+                return StatusCode(409, "Email adress already used");
+
+            if (!contactMS.password.Equals(contactMS.confirm_password))
+                return BadRequest("Password fields don't match");
 
             Guid id = await _service.ContactCreate(contactMS);
             if (id == Guid.Empty)

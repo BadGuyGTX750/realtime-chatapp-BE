@@ -21,6 +21,9 @@ namespace chatapp.Dtos
         [Required]
         public string email { get; set; }
 
+        [Required]
+        public string password { get; set; }
+
         [JsonIgnore]
         public List<GroupMember> group_members { get; set; }
     }

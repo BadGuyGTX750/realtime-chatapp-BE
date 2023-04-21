@@ -15,5 +15,11 @@ namespace chatapp.Dtos
 
         [Required]
         public string email { get; set; }
+
+        [Required]
+        public string password { get; set; }
+
+        [Required]
+        public string confirm_password { get; set; }
     }
 }

@@ -40,6 +40,18 @@ namespace chatapp.Repositories
             }
         }
 
+        public async Task<Contact> ContactGetByEmail(string email)
+        {
+            try
+            {
+                return await _dbContext.contacts.Where(u => u.email == email).FirstAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<bool> ContactUpdate(Contact contact)
         {
             try
