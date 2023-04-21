@@ -26,6 +26,8 @@ namespace chatapp.Infrastructure
             // Configure the HTTP request pipeline.
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
 
             return app;
