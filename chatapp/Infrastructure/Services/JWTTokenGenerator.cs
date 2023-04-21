@@ -42,6 +42,7 @@ namespace chatapp.Infrastructure.Services
         {
             Claim[] claims = new Claim[]
             {
+                new Claim("contact_id", contact.contact_id.ToString()),
                 new Claim("first_name", contact.first_name),
                 new Claim("last_name", contact.last_name),
                 new Claim("username", contact.username),
