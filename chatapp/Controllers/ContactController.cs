@@ -1,19 +1,28 @@
-﻿using BCrypt.Net;
-using chatapp.Dtos;
-using chatapp.Repositories;
+﻿using chatapp.Dtos;
+using chatapp.Infrastructure.Services;
 using chatapp.Services;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Security.Claims;
 
 namespace chatapp.Controllers
 {
     public class ContactController : Controller
     {
         private readonly ContactService _service;
+        private readonly JWTTokenGenerator _jwtTokenGenerator;
+        private readonly CookieOptions _cookieOptions;
 
-        public ContactController(ContactService service)
+        public ContactController(ContactService service,
+            JWTTokenGenerator jwtTokenGenerator)
         {
             _service = service;
+            _jwtTokenGenerator = jwtTokenGenerator;
+            _cookieOptions = new CookieOptions
+            {
+                HttpOnly = false,
+                Secure = true,
+                SameSite = SameSiteMode.None
+            };
         }
 
         [HttpPost("/api/contact/register")]
@@ -49,6 +58,13 @@ namespace chatapp.Controllers
 
             if (!BCrypt.Net.BCrypt.Verify(credentials.password, contact.password))
                 return BadRequest("Bad credentials");
+
+            // create claims for the logged in user
+            ClaimsIdentity claimsIdentity = _jwtTokenGenerator.CreateClaimsIdentity(contact);
+
+            // give the user a token based on his Identity
+            string token = _jwtTokenGenerator.GenerateToken(claimsIdentity);
+            Response.Cookies.Append("realtime-chatapp-access-token", token, _cookieOptions);
 
             return Ok();
         }
