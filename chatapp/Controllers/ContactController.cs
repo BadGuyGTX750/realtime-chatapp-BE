@@ -93,6 +93,13 @@ namespace chatapp.Controllers
             return Ok(contact);
         }
 
+        [HttpGet("/api/contact/getClaims")]
+        public async Task<IActionResult> GetClaims()
+        {
+            var claimsDict = _jwtTokenGenerator.GetClaimsToDict(Request.Cookies["realtime-chatapp-access-token"]);
+            return Ok(claimsDict);
+        }
+
 
         [HttpDelete("/api/contact/deleteById")]
         public async Task<IActionResult> DeleteById([FromQuery] Guid id)

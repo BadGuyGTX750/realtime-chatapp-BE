@@ -51,5 +51,21 @@ namespace chatapp.Infrastructure.Services
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims);
             return claimsIdentity;
         }
+
+        public IDictionary<string, string> GetClaimsToDict(string jwtToken)
+        {
+            List<string> exclusionList = new List<string>() { "nbf", "exp", "iat", "iss", "aud" };
+
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken token = tokenHandler.ReadJwtToken(jwtToken);
+            
+            var claims = token.Claims;
+            Dictionary<string, string> pairs = new Dictionary<string, string>();
+            foreach(Claim claim in claims) {
+                pairs.Add(claim.Type.ToString(), claim.Value);
+            }
+
+            return pairs.Where(u => !exclusionList.Contains(u.Key)).ToDictionary(u => u.Key, u => u.Value);
+        }
     }
 }
