@@ -1,4 +1,5 @@
-﻿using chatapp.Dtos;
+﻿using BCrypt.Net;
+using chatapp.Dtos;
 using chatapp.Repositories;
 using chatapp.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,7 @@ namespace chatapp.Controllers
             if (!contactMS.password.Equals(contactMS.confirm_password))
                 return BadRequest("Password fields don't match");
 
+            contactMS.password = BCrypt.Net.BCrypt.HashPassword(contactMS.password);
             Guid id = await _service.ContactCreate(contactMS);
             if (id == Guid.Empty)
                 return StatusCode(500);
@@ -45,7 +47,7 @@ namespace chatapp.Controllers
             if (contact == null)
                 return NotFound("Account does not exist");
 
-            if (contact.password.Equals(credentials.password))
+            if (!BCrypt.Net.BCrypt.Verify(credentials.password, contact.password))
                 return BadRequest("Bad credentials");
 
             return Ok();
