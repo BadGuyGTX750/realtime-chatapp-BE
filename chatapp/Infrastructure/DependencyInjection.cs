@@ -41,6 +41,18 @@ namespace chatapp.Infrastructure
             var secretConfig = configBuilder.Build();
             services.Configure<JWTSettings>(secretConfig.GetSection("JWTSettings"));
 
+            // Add CORS
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+            });
+
             // Configure Entity Framework
             services.AddDbContext<Entities>(options =>
             {
