@@ -52,9 +52,11 @@ namespace chatapp.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            // Should return 404 NotFound(),
+            // but client should not know that the email he used is not registered
             var contact = await _service.ContactGetByEmail(credentials.email);
             if (contact == null)
-                return NotFound("Account does not exist");
+                return BadRequest("Account does not exist");
 
             if (!BCrypt.Net.BCrypt.Verify(credentials.password, contact.password))
                 return BadRequest("Bad credentials");
